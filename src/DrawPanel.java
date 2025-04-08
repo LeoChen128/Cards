@@ -41,7 +41,9 @@ class DrawPanel extends JPanel implements MouseListener {
     public void dealNewHand() {
         hand.clear();
         for (int i = 0; i < 9; i++) {
-            if (deck.isEmpty()) break;
+            if (deck.isEmpty()){
+                break;
+            }
             int r = (int)(Math.random()*deck.size());
             Card c = deck.remove(r);
             hand.add(c);
@@ -58,7 +60,7 @@ class DrawPanel extends JPanel implements MouseListener {
         boolean hasValidMove = checkForValidMoves();
 
         if (!hasValidMove && !deck.isEmpty()) {
-            hasValidMove = true; // Can replace cards to get valid moves
+            hasValidMove = true;
         }
 
         if (!hasValidMove) {
@@ -266,9 +268,15 @@ class DrawPanel extends JPanel implements MouseListener {
             boolean hasJack = false, hasQueen = false, hasKing = false;
             for (int i : indices) {
                 String val = hand.get(i).getValue();
-                if (val.equals("J")) hasJack = true;
-                if (val.equals("Q")) hasQueen = true;
-                if (val.equals("K")) hasKing = true;
+                if (val.equals("J")){
+                    hasJack = true;
+                }
+                if (val.equals("Q")){
+                    hasQueen = true;
+                }
+                if (val.equals("K")){
+                    hasKing = true;
+                }
             }
             if (hasJack && hasQueen && hasKing) {
                 for (int i : indices) {
