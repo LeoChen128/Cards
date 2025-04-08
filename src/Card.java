@@ -21,13 +21,9 @@ public class Card {
         this.imageFileName = "images/card_"+suit+"_"+value+".png";
         this.show = true;
         this.backImageFileName = "images/card_back.png";
-
-        // which image should I be showing for the card?
-        // the front image, or the back image
         this.image = readImage();
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.highlight = false;
-        // for the box around it
     }
 
     public Rectangle getCardBox() {
@@ -46,6 +42,12 @@ public class Card {
         return value;
     }
 
+    public int getNumericalValue() {
+        if (value.equals("A")) return 1;
+        if (value.equals("J") || value.equals("Q") || value.equals("K")) return 0;
+        return Integer.parseInt(value);
+    }
+
     public String getImageFileName() {
         return imageFileName;
     }
@@ -59,8 +61,8 @@ public class Card {
         this.image = readImage();
     }
 
-    public void flipHighlight() {
-        highlight = !highlight;
+    public void setHighlight(boolean highlight) {
+        this.highlight = highlight;
     }
 
     public boolean getHighlight() {
@@ -71,13 +73,13 @@ public class Card {
         return image;
     }
 
-    // a BufferedImage object is an object that represents an
-    // image file to be drawn on a screen
+    public boolean isFaceUp() {
+        return show;
+    }
+
     public BufferedImage readImage() {
         try {
             BufferedImage image;
-            // if sho is true, show the front
-            // otherwise show the back of the card
             if (show) {
                 image = ImageIO.read(new File(imageFileName));
             }
@@ -103,16 +105,5 @@ public class Card {
             }
         }
         return deck;
-    }
-
-    public static ArrayList<Card> buildHand() {
-        ArrayList<Card> deck = Card.buildDeck();
-        ArrayList<Card> hand = new ArrayList<Card>();
-        for (int i = 0; i < 9; i++) {
-            int r = (int)(Math.random()*deck.size());
-            Card c = deck.remove(r);
-            hand.add(c);
-        }
-        return hand;
     }
 }
