@@ -107,8 +107,6 @@ class DrawPanel extends JPanel implements MouseListener {
         return hasJack && hasQueen && hasKing;
     }
 
-
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int cardWidth = 71;
@@ -133,23 +131,8 @@ class DrawPanel extends JPanel implements MouseListener {
                 y += cardHeight + 10;
             }
         }
-//        for (int i = 0; i < hand.size(); i++) {
-//            Card c = hand.get(i);
-//            if (c.getHighlight()) {
-//                // draw the border rectangle around the card
-//                g.drawRect(x, y, c.getImage().getWidth(), c.getImage().getHeight());
-//            }
-//            // establish the location of the rectangle "hit-box"
-//            c.setRectangleLocation(x, y);
-//
-//            g.drawImage(c.getImage(), x, y, null);
-//            x = x + c.getImage().getWidth() + 10;
-//        }
 
         // drawing the bottom button with a certain font
-//        g.setFont(new Font("Courier New", Font.BOLD, 20));
-//        g.drawString("GET NEW CARDS", 150, 120); // how u print a string in the JPanel
-//        g.drawRect((int)button.getX(), (int)button.getY(), (int)button.getWidth(), (int)button.getHeight());
         g.setFont(new Font("Courier New", Font.BOLD, 20));
         g.drawString("GET NEW CARDS", 150, 420);
         g.drawRect((int)button.getX(), (int)button.getY(), (int)button.getWidth(), (int)button.getHeight());
@@ -161,27 +144,23 @@ class DrawPanel extends JPanel implements MouseListener {
             g.setColor(Color.GREEN);
             g.setFont(new Font("Courier New", Font.BOLD, 30));
             g.drawString("YOU WIN!", 180, 200);
-        } else if (gameLost) {
+        }
+        else if (gameLost) {
             g.setColor(Color.RED);
             g.setFont(new Font("Courier New", Font.BOLD, 30));
             g.drawString("NO VALID MOVES!", 130, 200);
         }
-    // drawing the rectangle (boarder)
     }
 
     public void mousePressed(MouseEvent e) {
-
         // gets cords
         Point clicked = e.getPoint();
-
         // left click
         if (e.getButton() == 1) {
             // takes in a point object and returns true/false whether a point is in the place
             // if "clicked" is inside the button rectangle
             // aka --> did you click the button?
             if (button.contains(clicked)) {
-//                hand = Card.buildHand();
-                //creates new set of 5 cards
                 dealNewHand();
                 gameLost = false;
                 return;
@@ -190,12 +169,6 @@ class DrawPanel extends JPanel implements MouseListener {
             // go through each card
             // check if any of those were clicked on
             // if it was clicked, flip the card
-//            for (int i = 0; i < hand.size(); i++) {
-//                Rectangle box = hand.get(i).getCardBox();
-//                if (box.contains(clicked)) {
-//                    hand.get(i).flipCard();
-//                }
-//            }
             for (int i = 0; i < hand.size(); i++) {
                 Rectangle box = hand.get(i).getCardBox();
                 if (box.contains(clicked)) {
@@ -211,12 +184,6 @@ class DrawPanel extends JPanel implements MouseListener {
 
         // right click
         if (e.getButton() == 3) {
-//            for (int i = 0; i < hand.size(); i++) {
-//                Rectangle box = hand.get(i).getCardBox();
-//                if (box.contains(clicked)) {
-//                    hand.get(i).flipHighlight();
-//                }
-//            }
             handleRightClick(clicked);
         }
     }
