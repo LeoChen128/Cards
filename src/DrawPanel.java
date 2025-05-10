@@ -176,7 +176,6 @@ class DrawPanel extends JPanel implements MouseListener {
                     hand.get(i).setHighlight(false);
                 }
             }
-
             checkGameStatus();
         }
 
@@ -194,12 +193,12 @@ class DrawPanel extends JPanel implements MouseListener {
                 if (box.contains(clicked)) {
                     if (hand.get(i).getHighlight()) {
                         replaceCard(i);
-                    } else {
+                    }
+                    else {
                         hand.get(i).setHighlight(!hand.get(i).getHighlight());
                     }
                 }
             }
-
             ArrayList<Integer> highlightedIndices = getHighlightedIndices();
 
             if (highlightedIndices.size() == 2) {
@@ -232,7 +231,9 @@ class DrawPanel extends JPanel implements MouseListener {
         }
 
         public void checkAndRemoveTrio(ArrayList<Integer> indices) {
-            boolean hasJack = false, hasQueen = false, hasKing = false;
+            boolean hasJack = false;
+            boolean hasQueen = false;
+            boolean hasKing = false;
             for (int i : indices) {
                 String val = hand.get(i).getValue();
                 if (val.equals("J")){
